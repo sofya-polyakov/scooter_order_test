@@ -1,7 +1,7 @@
 import configuration
 import requests
 import data
-import get_order_by_track_test
+
 def post_new_order(body):
     return requests.post(configuration.URL_SERVICE + configuration.ORDER_PATH, json=body, headers=data.headers)
 

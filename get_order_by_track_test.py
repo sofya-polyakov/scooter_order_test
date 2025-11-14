@@ -1,7 +1,6 @@
 import sender_stand_request
 import data
 
-
 def get_track(body):
     response = sender_stand_request.post_new_order(body)
     return response.json()["track"]

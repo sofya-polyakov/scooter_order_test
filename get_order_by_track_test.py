@@ -1,18 +1,15 @@
-import configuration
 import sender_stand_request
 import data
-import requests
 
 
-def get_track():
-    response = sender_stand_request.post_new_order(data.order_body)
+def get_track(body):
+    response = sender_stand_request.post_new_order(body)
     return response.json()["track"]
 
-track_response = str(get_track())
-
-def get_order_by_track():
-    return requests.get(configuration.URL_SERVICE + configuration.TRACK_PATH + track_response)
-
-def test_possitive_assert():
-    order_response = get_order_by_track()
+def test_positive_assert():
+    assert_body = data.order_body.copy()
+    sender_stand_request.post_new_order(assert_body)
+    assert_track_response = str(get_track(assert_body))
+    order_response = sender_stand_request.get_order_by_track(assert_track_response)
     assert order_response.status_code == 200
+
